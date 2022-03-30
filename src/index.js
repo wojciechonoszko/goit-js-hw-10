@@ -13,7 +13,7 @@ fetchUsersBtn.addEventListener("click", () => {
 });
 
 function fetchUsers() {
-  return fetch("https://jsonplaceholder.typicode.com/users").then(
+  return fetch("https://restcountries.com/v3.1/all").then(
     (response) => {
       if (!response.ok) {
         throw new Error(response.status);
@@ -27,16 +27,12 @@ function renderUserList(users) {
   const markup = users
     .map((user) => {
       return `<li>
-          <p><b>Name</b>: ${user.name}</p>
-          <p><b>Email</b>: ${user.email}</p>
-          <p><b>Company</b>: ${user.company.name}</p>
+          <p><b>Name</b>: ${user.name.official}</p>
+          <p><b>Email</b>: ${user.capital}</p>
+          <p><b>Company</b>: ${user.population}</p>
         </li>`;
     })
     .join("");
   userList.innerHTML = markup;
 }
 
-// lkfjlkasdjlkfjasdlkfjlkasjdlkfjasdlkfjasdfklasklf
-// sadlkfjalskdjflkasjdlkfjaslkdjfasdasdklf
-// laksdjfkljaslkfjlkasdjflkasjdlkfjasldkfjklasdf
-// klasdfjlkasdjflkajsdklfjaskd
