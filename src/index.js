@@ -28,8 +28,10 @@ function renderUserList(users) {
     .map((user) => {
       return `<li>
           <p><b>Name</b>: ${user.name.official}</p>
-          <p><b>Email</b>: ${user.capital}</p>
-          <p><b>Company</b>: ${user.population}</p>
+          <p><b>Capital</b>: ${user.capital}</p>
+          <p><b>Population</b>: ${user.population}</p>
+          <p><b>Flags</b>: ${user.flags.svg}</p>
+          <p><b>languages</b>: ${user.languages}</p>
         </li>`;
     })
     .join("");
