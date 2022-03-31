@@ -5,6 +5,14 @@ const DEBOUNCE_DELAY = 300;
 
 const fetchUsersBtn = document.querySelector(".btn");
 const userList = document.querySelector(".user-list");
+const input = document.querySelector('input').value;
+
+input.addEventListener('input', doThing());
+
+function doThing(){
+  console.log('Horray! Someone wrote "' + input + '"!"')
+}
+console.log(input)
 
 fetchUsersBtn.addEventListener("click", () => {
   fetchUsers()
@@ -12,8 +20,12 @@ fetchUsersBtn.addEventListener("click", () => {
     .catch((error) => console.log(error));
 });
 
+
+
+const searchParams = input;
+
 function fetchUsers() {
-  return fetch("https://restcountries.com/v3.1/all").then(
+  return fetch(`https://restcountries.com/v3.1/name/${searchParams}`).then(
     (response) => {
       if (!response.ok) {
         throw new Error(response.status);
