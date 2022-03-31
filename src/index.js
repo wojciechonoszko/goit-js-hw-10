@@ -26,6 +26,7 @@ function fetchUsers() {
 function renderUserList(users) {
   const markup = users
     .map((user) => {
+      // user = document.querySelector("input[type='text']").content
       return `<li>
           <p><b>Name</b>: ${user.name.official}</p>
           <p><b>Capital</b>: ${user.capital}</p>
