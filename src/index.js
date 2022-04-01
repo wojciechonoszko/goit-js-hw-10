@@ -42,7 +42,7 @@ console.log(input.value.length)
 // const searchParams = input.value;
 
 function fetchCountries() {
-  return fetch(`https://restcountries.com/v3.1/name/${input.value.trim()}?fields=name,capital,population,flags,languages`).then(
+  return fetch(`https://restcountries.com/v2/name/${input.value.trim()}?fields=name,capital,population,flags,languages`).then(
     (response) => {
       if ((!response.ok) && (input.value.length > 0)) {
         alert("OOps, there is no country with that name");
@@ -78,12 +78,14 @@ function fetchCountries() {
 function renderCountryList(countries) {
   console.log(countries.length)
   
+  
 if ((countries.length >= 2) && (countries.length <= 10)) {
   const markup = countries
     .map((country) => {
       return `<li>
       <p>
-      <b>Flags</b>: ${country.flags.svg} <b>Name</b>: ${country.name.official}
+      <b>Flags</b>: <img class="flag" src=" ${country.flags.svg}" alt="flag" width=200><b>Name</b>: 
+      ${country.name}
       </p>
       </li>`;
     })
@@ -104,11 +106,20 @@ if ((countries.length >= 2) && (countries.length <= 10)) {
   } else if (countries.length === 1) {
     const markup = countries
       .map((country) => {
+        console.log(country.name);
+        const array=[];
+
+        for (const key of country.languages) {
+          array.push(key.name);
+          console.log(key.name);
+          
+          
+        }
         return `<li>
-           <p><b>Name</b>: ${country.name.official}</p>
+           <p><b>Name</b>: ${country.name}</p>
            <p><b>Population</b>: ${country.population}</p>
-           <p><b>Flags</b>: ${country.flags.svg}</p>
-           <p><b>languages</b>: ${country.languages}</p>
+           <p><b>Flags</b>:<img class="flag" src=" ${country.flags.svg}" alt="flag" width=200></p>
+           <p><b>languages</b>: ${array}</p>
          </li>`;
       })
       .join("");

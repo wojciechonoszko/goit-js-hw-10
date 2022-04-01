@@ -32,3 +32,8 @@ p {
 .user-list li:not(:last-child) {
   margin-bottom: 16px;
 }
+
+.flag {
+  width: 200px;
+  height: 140px;
+}
