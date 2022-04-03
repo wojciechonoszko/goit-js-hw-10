@@ -1,4 +1,4 @@
-// import './css/styles.css';
+import './css/styles.css';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -83,10 +83,8 @@ if ((countries.length >= 2) && (countries.length <= 10)) {
   const markup = countries
     .map((country) => {
       return `<li>
-      <p>
-      <b>Flags</b>: <img class="flag" src=" ${country.flags.svg}" alt="flag" width=200><b>Name</b>: 
-      ${country.name}
-      </p>
+      <p><img class="flag" src=" ${country.flags.svg}" alt="flag">
+          <span class=country-names>${country.name}</span></p>
       </li>`;
     })
     .join("");
@@ -110,16 +108,17 @@ if ((countries.length >= 2) && (countries.length <= 10)) {
         const array=[];
 
         for (const key of country.languages) {
-          array.push(key.name);
+          array.push(" "+key.name);
           console.log(key.name);
           
           
         }
         return `<li>
-           <p><b>Name</b>: ${country.name}</p>
+          <p><img class="flag" src=" ${country.flags.svg}" alt="flag">
+          <span class=country-name>${country.name}</span></p>
+          <p><b>Capital</b>: ${country.capital}</p>
            <p><b>Population</b>: ${country.population}</p>
-           <p><b>Flags</b>:<img class="flag" src=" ${country.flags.svg}" alt="flag" width=200></p>
-           <p><b>languages</b>: ${array}</p>
+           <p><b>Languages</b>: ${array}</p>
          </li>`;
       })
       .join("");
