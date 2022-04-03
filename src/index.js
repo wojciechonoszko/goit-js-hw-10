@@ -1,4 +1,5 @@
 import './css/styles.css';
+import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -6,7 +7,10 @@ const DEBOUNCE_DELAY = 300;
 const fetchUsersBtn = document.querySelector(".btn");
 const userList = document.querySelector(".user-list");
 const countryList = document.querySelector(".country-list");
-const input = document.querySelector('input');
+let input = document.querySelector('input');
+
+
+console.log(input.value.trim())
 
 //input.addEventListener('input', doThing());
 
@@ -18,6 +22,7 @@ const input = document.querySelector('input');
 // );
 
 input.addEventListener("input", _.debounce(() => {
+  
   fetchCountries()
     .then((countries) => renderCountryList(countries))
     .catch((error) => console.log(error));
@@ -26,8 +31,9 @@ input.addEventListener("input", _.debounce(() => {
 
 function doThing(){
   console.log('Horray! Someone wrote "' + input + '"!"')
-}
-console.log(input.value.length)
+};
+
+
 
 
 
@@ -42,15 +48,16 @@ console.log(input.value.length)
 // const searchParams = input.value;
 
 function fetchCountries() {
+
   return fetch(`https://restcountries.com/v2/name/${input.value.trim()}?fields=name,capital,population,flags,languages`).then(
     (response) => {
-      if ((!response.ok) && (input.value.length > 0)) {
-        alert("OOps, there is no country with that name");
+      if ((!response.ok) && (input.value.length > 0) && (input.value.trim() !== "")) {
+        Notiflix.Notify.failure("Oops, there is no country with that name");
         throw new Error(response.status);
         
       }
       return response.json();
-      //return fetchCountries.js();
+      //return fetchCountries.json();
     }
   )
   // .then((data) => {
@@ -90,6 +97,7 @@ if ((countries.length >= 2) && (countries.length <= 10)) {
     .join("");
   countryList.innerHTML = markup;
 } else if (countries.length > 10) {
+  Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
   const markup = countries
     .map((country) => {
       return `
@@ -100,6 +108,7 @@ if ((countries.length >= 2) && (countries.length <= 10)) {
     })
     .join("");
   countryList.innerHTML = markup;
+  
     
   } else if (countries.length === 1) {
     const markup = countries
