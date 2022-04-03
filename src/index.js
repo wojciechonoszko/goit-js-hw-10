@@ -38,7 +38,7 @@ function fetchCountries() {
 
 
 function renderCountryList(countries) {
-  console.log(countries.length)
+  console.log("countries count: " + countries.length)
   
   
 if ((countries.length >= 2) && (countries.length <= 10)) {
@@ -68,12 +68,12 @@ if ((countries.length >= 2) && (countries.length <= 10)) {
   } else if (countries.length === 1) {
     const markup = countries
       .map((country) => {
-        console.log(country.name);
+        //console.log(country.name);
         const array=[];
 
         for (const key of country.languages) {
           array.push(" "+key.name);
-          console.log(key.name);
+          //console.log(key.name);
           
           
         }
